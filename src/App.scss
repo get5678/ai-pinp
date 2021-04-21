@@ -1,0 +1,14 @@
+/* 字体通常为16px， 100%=16px，1px=6.25%，所以10px=62.5%  */
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}

@@ -1,0 +1,32 @@
+.aipin-index {
+    width: 100vw;
+    height: 100%;
+    opacity: 1;
+    background: linear-gradient(180deg,#f9a3c6, #dcb8d9 33%, #a3e3fe);
+}
+  
+.index-image {
+    width: 180px;
+    height: 180px;
+    opacity: 1;
+    background: #ffffff;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    top: 215px;
+}
+  
+.index-image-signal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.index-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    top: 53vh;
+}

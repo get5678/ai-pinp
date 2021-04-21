@@ -1,0 +1,51 @@
+p {
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    background: none;
+    outline: none;
+    box-sizing: border-box;
+    width: 9rem;
+    height: 4.6rem;
+    background: #ffffff;
+    border: 1px solid #797979;
+    border-radius: 2.4rem;
+    font-size: 1.8rem;
+    color: #333333;
+   
+}
+
+.aipin-dialog {
+    width: 34rem;
+    height: 34rem;
+    padding: 1.2rem;
+    opacity: 0.8;
+    background: #ffffff;
+    border-radius: 2.4rem;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.dialog-img {
+    width: 6.4rem;
+    height: 6.4rem;
+}
+
+.dialog-title {
+    font-size: 2.6rem;
+    margin-bottom: 2rem;
+    margin-top: 0.2rem;
+}
+
+.dialog-buttons {
+    display: flex;
+    width:76%;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 2rem;
+}
