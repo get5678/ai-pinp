@@ -1,24 +1,26 @@
 import axios from 'axios';
 
-const baseUrl = 'http://127.0.0.1:7001/';
+const baseUrl = 'http://127.0.0.1:7004/';
 
 const http = {};
 
 const result = (resolve, reject, res) => {
+
     let data = res.data;
-    if (data.code === 0) {
-        resolve(data);
+    if (data.code === 200) {
+        resolve(data.data || data);
     } else {
-        reject(data);
+        reject(data.msg);
     }
 }
 
-http.get = url => {
+http.get = (url, params) => {
     return new Promise((resolve, reject) => {
         // axios.defaults.headers.common['token'] = localStorage.getItem('token');
         axios({
             method: 'get',
-            url: baseUrl + url
+            url: baseUrl + url,
+            params
         }).then((res) => {
             result(resolve, reject, res);
         }).catch((err) => {
@@ -33,7 +35,8 @@ http.post = (url, data) => {
     return new Promise((resolve, reject) => {
         // axios.defaults.headers.common['token'] = localStorage.getItem('token');
 
-        let contentType = url === 'upload' ? 'multipart/form-data' : 'application/x-www-form-urlencoded';
+        let contentType = url === 'upload' ? 'multipart/form-data' : 'application/json';
+
 
         axios({
             method: 'post',

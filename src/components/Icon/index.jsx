@@ -180,20 +180,11 @@ const LinkToRoute = (props) => {
 
         fd.append('file', files[0])
 
-        let test = files[0];
-        let name = test.name;
-
-        // console.log('test', test)
+        
         let image = '';
 
-        upload(fd)
-        .then(res => {
-            console.log('icon', res);
-            image = res;
-        })
-        .catch(err => console.log('icon-err', err))
+        console.log('fordata', files[0]);
 
-        const testUrl = 'https://longrou.oss-cn-chengdu.aliyuncs.com/aipin.png';
 
         // for (let i = 0; i < len; i++) {
         //     const res = await fileReader(files[i]);
@@ -207,7 +198,7 @@ const LinkToRoute = (props) => {
         //     }
         // }
 
-        iconLink && history.push(`${iconLink}?imageUrl=${testUrl}`);
+        iconLink && history.push(iconLink, files)
         
     }
 

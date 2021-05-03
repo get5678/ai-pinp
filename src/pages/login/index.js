@@ -7,6 +7,9 @@ import { isNotNull, debounce } from '../../utils';
 
 import './index.scss';
 
+import { login } from '../../api';
+import { useHistory } from 'react-router';
+
 
 const formType = {
     captcha: '验证码',
@@ -18,11 +21,15 @@ const formType = {
 function Login(props) {
 
 
-    const formData = {};
+    let formData = {};
+
+    const history = useHistory();
 
     const handleToSubmit = () => {   
 
         let flag = true;
+
+        console.log('fordata', formData)
 
         if (!isNotNull(formData)) {
             Toast.info('请填写完整信息')
@@ -45,18 +52,26 @@ function Login(props) {
 
         if (flag === true && isNotNull(formData)) {
 
-            Toast.info('登录成功');
-           
-            // 这里上传数据
+            const info = {
+                phone: formData.phone,
+                password: formData.password
+            }
 
-            // 登录成功后跳转到首页
-            
+            login(info).then(res => {
+                console.log('res', res);
+                 // 登录成功后跳转到首页
+                Toast.info('登录成功');
+                window.localStorage.setItem('user', JSON.stringify(res))
+                history.push('/index');
+            }).catch(err => {
+                Toast.error(err);
+            })
            
         }
     }
 
     const handleToRegister = debounce(() => {
-        props.history.push('/register')
+        history.push('/register')
     }, 300)
 
     return (

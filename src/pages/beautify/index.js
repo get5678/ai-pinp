@@ -8,7 +8,7 @@ import 'antd-mobile/lib/tabs/style/css';
 
 import Slider from 'antd-mobile/lib/slider';
 
-import { UrlParmas } from '../../utils';
+import { UrlParmas, fileReader } from '../../utils';
 import { 
     IMAGE_PEN, 
     IMAGE_BRIGHTNESS, 
@@ -24,6 +24,7 @@ import {
 } from '../../const';
 
 import './index.scss';
+import { useHistory } from 'react-router';
 
 // 亮度  锐化 对比度  色调  裁剪 滤镜
 
@@ -125,14 +126,21 @@ function Beautify(props) {
 
 
     const CanvasRef = useRef(null);   
+    const { state } = useHistory().location;
 
-    const handleToGetCanvas = (src) => {
+    // 从react-router中获取数据
+    const handleToGetCanvas = async(src) => {
+
+        let type = Object.prototype.toString.call(src);
+        if (type === "[object File]") {
+            src = await fileReader(src);
+        }
+
         let canva = CanvasRef.current;
-       
         let ctx = canva.getContext('2d');
         let imageObj = new Image();
         imageObj.onload = function() {
-            ctx.drawImage(this, 0, 0)
+            ctx.drawImage(this, 0, 0, 300, 460)
         }
         imageObj.src = src;
     }
@@ -159,16 +167,24 @@ function Beautify(props) {
     )
 
     useEffect(() => {
-        const { imageUrl } = UrlParmas();
-        
-        imageUrl && handleToGetCanvas(imageUrl);
+        // const { imageUrl } = UrlParmas();
+
+        // imageUrl && handleToGetCanvas(imageUrl);
+
+        if (state.length > 0) {
+            handleToGetCanvas(state[0])
+        }
+
+       
     }, [])
 
     return (
         <div className="beautify-conatiner">
             <div className="nav-all">
                 <ArrowBack color="rgba(119, 119, 119, 100)" />
-                <MyButton></MyButton>
+                <MyButton 
+                    on
+                />
             </div>
            <canvas ref={CanvasRef} id="beautify-canvas" width="300" height="460" className="vancas-image">
                暂不支持canvas

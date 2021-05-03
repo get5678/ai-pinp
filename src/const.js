@@ -32,8 +32,12 @@ export const IMAGE_FOUR = `${IMAGE}four.png`
 export const IMGAE_GLASSES = `${IMAGE}glasses.png`
 
 
-
-
+export const IMAGE_EXAMPLE1 = `${IMAGE}example1.jpeg` // 拼图模版例子1
+export const IMAGE_EXAMPLE2 = `${IMAGE}example2.png` 
+export const IMAGE_EXAMPLE3 = `${IMAGE}example3.jpeg` // 例子3
+export const IMAGE_EXAMPLE4 = `${IMAGE}example4.png`
+export const IMAGE_EXAMPLE5 = `${IMAGE}example5.jpeg`
+export const IMAGE_EXAMPLE6 = `${IMAGE}example6.jpeg`
 
 const findNode = (oriObj, num) => {
 

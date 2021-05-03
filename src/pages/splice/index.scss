@@ -13,9 +13,24 @@
     padding-bottom: 4rem;
 }
 
-.img-item {
+.item-container {
+    position: relative;
     width: 16rem;
     height: 26.6rem;
     border: 1px solid #333;
     margin-top: 1rem;
+}
+
+.img-item {
+    width: 16rem;
+    height: 26.6rem;
+}
+
+.img-input {
+    position: absolute;
+    width: 16rem;
+    height: 26.6rem;
+    top: 0;
+    left: 0;
+    opacity: 0;
 }

@@ -33,8 +33,6 @@ function Index(props) {
             url: '/splice',
             text: '拼图',
             handleToClick,
-            fileType: 'image',
-            multiple: true,
             img: IMAGE_SPLICE
         },
         {

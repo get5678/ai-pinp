@@ -15,18 +15,16 @@ const ButtonStyle = {
 
 function MyButton(props) {
 
-    const { text = '保存', handleToSubmit } = props;
+    const { text = '保存', handleToSubmit, time = 200 } = props;
 
     const handleToClick = (e) => {
-        console.log('e', e);
-
         if (typeof(handleToSubmit) === 'function') {
             handleToSubmit();
         }
     }
 
     return (
-        <div style={ButtonStyle} onClick={debounce(e => handleToClick(e), 200)}>
+        <div style={ButtonStyle} onClick={debounce(e => handleToClick(e), time)}>
             {text}
         </div>
     );

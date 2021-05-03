@@ -81,7 +81,6 @@ export const  fileReader = (file) => {
         const reader = new FileReader();
 
         reader.onload = e => {
-            console.log('res', e.target.result)
             resolve(e.target.result);
         }
 
@@ -90,6 +89,39 @@ export const  fileReader = (file) => {
         reader.readAsDataURL(file);
     })
 }
+
+// 将base64变为file
+export const base64ToFile = (urlData, filename,  imageType = "image/png") => {
+
+    let exp = new RegExp('base64');
+
+    if (exp.test(urlData)) {
+        urlData = urlData.split(',')[1];
+    }
+
+    let data = window.atob(urlData);
+
+    let arraybuffer = new ArrayBuffer(data.length);
+
+    let ia = new Int8Array(arraybuffer);
+
+    for (let i = 0; i < data.length; i++) {
+        ia[i] = data.charCodeAt(i);
+    }
+    //canvas.toDataURL 返回的默认格式就是 image/png
+    // let blob = new Blob([ia], {
+    //     type: imageType
+    // });
+
+    // blob.name = filename;
+
+    let file = new File([ia], filename, {
+        type: imageType
+    });
+
+    return file;
+}
+
 
 // 返回url参数
 export const UrlParmas = () => {
@@ -105,4 +137,34 @@ export const UrlParmas = () => {
     }
 
     return objUrl;
+}
+
+function forEach(array, iteratee) {
+    let index = -1;
+    const length = array.length;
+    while (++index < length) {
+        iteratee(array[index], index);
+    }
+    return array;
+}
+// weakMap key只能为object；
+export function clone(target, map = new WeakMap()) {
+    if(typeof target === 'object') {
+        let isArray = Array.isArray(target);
+        let cloneTarget = isArray ? [] : {};
+        if(map.get(target)) {
+            return map.get(target);
+        }
+        map.set(target, cloneTarget);
+        let keys = isArray ? undefined : Object.keys(target);
+        forEach(keys || target, (value, key) => {
+            if (keys) {
+                key = value;
+            }
+            cloneTarget[key] = clone(target[key], map);
+        });
+        return cloneTarget;
+    } else {
+        return target;
+    }
 }
