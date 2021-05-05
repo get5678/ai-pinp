@@ -149,6 +149,7 @@ function forEach(array, iteratee) {
 }
 // weakMap key只能为object；
 export function clone(target, map = new WeakMap()) {
+    if (!target) return null;
     if(typeof target === 'object') {
         let isArray = Array.isArray(target);
         let cloneTarget = isArray ? [] : {};

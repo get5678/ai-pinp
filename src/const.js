@@ -6,6 +6,7 @@ export const IMAGE_TITLE_WHITE = `${IMAGE}aipin-white.png`
 export const IMAGE_PHONE = `${IMAGE}phone.png`
 export const IMAGE_USER = `${IMAGE}user.png`
 export const IMAGE_LOVE = `${IMAGE}love.png`
+export const IMAGE_LOVE_PINK = `${IMAGE}love_pink.png`
 export const IMAGE_ARROW = `${IMAGE}arrow.png`
 export const IMAGE_LOCK = `${IMAGE}lock.png`
 export const IMAGE_CAPTCHA = `${IMAGE}captcha.png`
@@ -38,6 +39,10 @@ export const IMAGE_EXAMPLE3 = `${IMAGE}example3.jpeg` // 例子3
 export const IMAGE_EXAMPLE4 = `${IMAGE}example4.png`
 export const IMAGE_EXAMPLE5 = `${IMAGE}example5.jpeg`
 export const IMAGE_EXAMPLE6 = `${IMAGE}example6.jpeg`
+
+
+export const IMAGE_BACK1 = `${IMAGE}back.jpeg`
+export const IMAGE_ICON = `${IMAGE}icon.png`
 
 const findNode = (oriObj, num) => {
 

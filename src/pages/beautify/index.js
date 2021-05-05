@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ArrowBack from '../../components/ArrowBack';
 import MyButton from '../../components/MyButton';
 import Icon from '../../components/Icon';
@@ -6,9 +6,17 @@ import Icon from '../../components/Icon';
 import Tabs from 'antd-mobile/lib/tabs';
 import 'antd-mobile/lib/tabs/style/css';
 
+import  Modal  from 'antd-mobile/lib/modal';
+import 'antd-mobile/lib/modal/style/css';
+
+import Toast from 'antd-mobile/lib/toast';
+import 'antd-mobile/lib/toast/style/css';
+
 import Slider from 'antd-mobile/lib/slider';
 
-import { UrlParmas, fileReader } from '../../utils';
+import { fileReader } from '../../utils';
+import { addwork } from '../../api';
+
 import { 
     IMAGE_PEN, 
     IMAGE_BRIGHTNESS, 
@@ -25,6 +33,8 @@ import {
 
 import './index.scss';
 import { useHistory } from 'react-router';
+
+const MyAlert = Modal.alert;
 
 // 亮度  锐化 对比度  色调  裁剪 滤镜
 
@@ -127,20 +137,25 @@ function Beautify(props) {
 
     const CanvasRef = useRef(null);   
     const { state } = useHistory().location;
+    const [img, setImg] = useState(null);
 
     // 从react-router中获取数据
-    const handleToGetCanvas = async(src) => {
+    const handleToGetCanvas = async(img) => {
 
-        let type = Object.prototype.toString.call(src);
+        let type = Object.prototype.toString.call(img);
+
+        let src = img;
+
         if (type === "[object File]") {
-            src = await fileReader(src);
+            src = await fileReader(img);
         }
 
         let canva = CanvasRef.current;
         let ctx = canva.getContext('2d');
         let imageObj = new Image();
         imageObj.onload = function() {
-            ctx.drawImage(this, 0, 0, 300, 460)
+            ctx.drawImage(this, 0, 0, 300, 460);
+            return img;
         }
         imageObj.src = src;
     }
@@ -148,6 +163,29 @@ function Beautify(props) {
     const handleToClickTab = (data, index) => {
         console.log('data:\n', data, 'index\n', index);
     }
+
+    const handleToSubmit = useCallback(() => {
+        let user = localStorage.getItem('user') || null;
+
+        if (user) {
+            user = JSON.parse(user);
+        }
+
+        let fd = new FormData();
+
+       // 多文件上传，需要循环一次push，而不是直接赋值
+
+        fd.append('file', img[0]);
+        fd.append('userId', user?.userId);
+        fd.append('phone', user?.phone);
+        fd.append('name', 'test')
+
+        addwork(fd).then(res => {
+            console.log('res', res);
+        }).catch(err => console.log('err', err))
+
+
+    }, [img]);
 
     const renderTabItem = (arr) => (
         arr && arr.map((item) => {
@@ -167,14 +205,12 @@ function Beautify(props) {
     )
 
     useEffect(() => {
-        // const { imageUrl } = UrlParmas();
-
-        // imageUrl && handleToGetCanvas(imageUrl);
+        
+        setImg(state);
 
         if (state.length > 0) {
             handleToGetCanvas(state[0])
         }
-
        
     }, [])
 
@@ -183,7 +219,7 @@ function Beautify(props) {
             <div className="nav-all">
                 <ArrowBack color="rgba(119, 119, 119, 100)" />
                 <MyButton 
-                    on
+                    handleToSubmit={handleToSubmit}
                 />
             </div>
            <canvas ref={CanvasRef} id="beautify-canvas" width="300" height="460" className="vancas-image">

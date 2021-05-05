@@ -1,0 +1,85 @@
+.setting-container {
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: grayscale(30%);
+    width: 100vw;
+    height: 100%;
+}
+
+
+.setting-nav {
+    width: 100vw;
+    height: 6rem;
+    display: flex;
+    padding: 1rem 0;
+    align-items: center;
+    position: relative;
+}
+
+.nav-title {
+    color: #fff;
+    font-size: 2.2rem;
+    margin: 0 auto;
+}
+
+.setting-item {
+    background: #fff;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    margin-bottom: 1rem;
+}
+
+.item-text {
+    color: #333;
+}
+
+.setting-avater {
+    width: 8rem;
+    height: 8rem;
+    background: #ffffff;
+    border-radius: 50%;
+    border: 1px solid #eee;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-right: 1rem;
+}
+
+.item-file {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.setting-input {
+    border: none;
+    width: 18rem;
+}
+
+.update-password {
+    padding: 0 .1rem;
+    color: #666;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    p {
+        width: 8rem;
+        text-align: center;
+        padding: 0.3rem;
+    }
+}
+
+.submit {
+    text-align: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #888;
+    margin-top: 6rem;
+}

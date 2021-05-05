@@ -9,6 +9,7 @@ import Splice from './pages/splice';
 import Spliceedit from './pages/spliceedit';
 import Video from './pages/video';
 import Mine from './pages/mine';
+import Setting from './pages/setting';
 
 
 import './App.scss';
@@ -37,6 +38,7 @@ function App() {
         <Route path="/spliceedit" component={Spliceedit} />
         <Route path="/video" component={Video} />
         <Route path="/mine" component={Mine} />
+        <Route path="/setting" component={Setting} />
        
         <Redirect from="*" to="/home" />
       </Switch>

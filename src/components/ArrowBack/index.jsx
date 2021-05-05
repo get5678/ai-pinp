@@ -6,11 +6,11 @@ import './index.scss';
 
 function ArrowBack(props) {
 
-    const { toPlace, style, color = '#fff', imgSrc = IMAGE_ARROW, handleToClick } = props;
+    const { toPlace, style, color = '#fff', imgSrc = IMAGE_ARROW, handleToClick, disable = false } = props;
 
     const handleToBack = throttle(() => {
-        if (typeof handleToClick === 'function') handleToClick();
-        window.history.back();
+        if (typeof handleToClick === 'function' && !disable) handleToClick();
+        !disable && window.history.back();
     }, 200)
 
     return (

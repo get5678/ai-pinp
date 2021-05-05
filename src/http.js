@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://127.0.0.1:7004/';
+const baseUrl = 'http://127.0.0.1:7001/';
 
 const http = {};
 
@@ -30,13 +30,12 @@ http.get = (url, params) => {
 }
 
 
-http.post = (url, data) => {
+http.post = (url, data, isFile = false) => {
 
     return new Promise((resolve, reject) => {
         // axios.defaults.headers.common['token'] = localStorage.getItem('token');
 
-        let contentType = url === 'upload' ? 'multipart/form-data' : 'application/json';
-
+        let contentType = isFile ? 'multipart/form-data' : 'application/json';
 
         axios({
             method: 'post',
