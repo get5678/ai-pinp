@@ -1,0 +1,44 @@
+.sociaty-container {
+    width: 100vw;
+}
+
+.sociaty-nav {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2rem;
+    border-bottom: 1px solid #e7e7e7;
+    .socity-title {
+        width: 9rem;
+    }
+}
+
+.sociaty-content {
+    width: 100vw;
+    margin-top: 1rem;
+    padding: 0 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+   
+}
+
+.sociaty-items {
+    width: 49%;
+    background: #fff;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.sociaty-img {
+    width: 100%;
+}
+
+.socity-icon {
+    width: 1.6rem;
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+}

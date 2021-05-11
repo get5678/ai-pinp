@@ -5,6 +5,10 @@ export const upload = (data) => {
     return http.post('upload', data, true);
 }
 
+export const upvideo = data => {
+    return http.post('upvideo', data, true);
+}
+
 export const test = () => {
     return http.get('test')
 }

@@ -1,8 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import { upload } from '../../api';
-
 import './index.scss'
 
 
@@ -167,38 +165,13 @@ const LinkToRoute = (props) => {
     }
 
 
-    const handleToChange = async(e) => {
+    const handleToChange = (e) => {
+
+        console.log('click', e)
+
         let files = e.target.files;
-        const len = files.length;
 
-        let key = multiple ? 'splice' : 'beautify';
-
-
-        let newFiles = [];
-
-        let fd = new FormData();
-
-        fd.append('file', files[0])
-
-        
-        let image = '';
-
-        console.log('fordata', files[0]);
-
-
-        // for (let i = 0; i < len; i++) {
-        //     const res = await fileReader(files[i]);
-        //     const data = await compress(res);
-        //     console.log('data', data)
-        //     newFiles.push(res);
-        //     try {
-        //         localStorage.setItem(key+i, res);
-        //     }catch (err) {
-        //         console.error(err);
-        //     }
-        // }
-
-        iconLink && history.push(iconLink, files)
+        iconLink && history.push(iconLink, files);
         
     }
 

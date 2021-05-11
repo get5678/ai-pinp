@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import Back from '../../components/ArrowBack';
 
@@ -15,6 +15,8 @@ import { getlist } from '../../api';
 import './index.scss';
 import { useHistory } from 'react-router';
 import { isNotNull } from '../../utils';
+
+import { WorkContext } from '../../App';
 
 const Child = item => {
     return (
@@ -35,51 +37,27 @@ const tablist = [
     }
 ]
 
-const test = [
-    {
-        img: 'https://i.loli.net/2021/04/14/WeaLprRmMhq1VTO.jpg'
-    },
-    {
-        img: 'https://i.loli.net/2021/04/14/ut2SXfhmaK4FinG.jpg'
-    },
-    {
-        img: 'https://i.loli.net/2021/04/14/WeaLprRmMhq1VTO.jpg'
-    },
-    {
-        img: 'https://i.loli.net/2021/04/14/WeaLprRmMhq1VTO.jpg'
-    },
-    {
-        img: 'https://i.loli.net/2021/04/14/ut2SXfhmaK4FinG.jpg'
-    },
-    {
-        img: 'https://i.loli.net/2021/04/14/ut2SXfhmaK4FinG.jpg'
-    },
-    {
-        img: 'https://c-ssl.duitang.com/uploads/item/201803/08/20180308223406_zKyVN.jpeg'
-    },
-    {
-        img: 'https://i.loli.net/2021/04/14/ut2SXfhmaK4FinG.jpg'
-    },
-    {
-        img: 'https://c-ssl.duitang.com/uploads/item/201803/08/20180308223406_zKyVN.jpeg'
-    },
-    {
-        img: 'https://i.loli.net/2021/04/14/WeaLprRmMhq1VTO.jpg'
-    },
-]
+const init_signature = '还没有个性签名哟～';
 
 function Mine(props) {
-
-    const init_signature = '还没有个性签名哟～';
-
 
     // userSate = { name, userId, phone, avater, signature, love}
     const [userState, setUserState] = useState(null);
     const history = useHistory();
+    const { data, setData } = useContext(WorkContext);
 
-    const handleToUpdate = (url = '/setting') => {
-        // 跳转到修改页面
-        history.push(url);
+
+    const handleToUpdate = () => {
+
+        console.log('suer', userState)
+
+        if (!isNotNull(userState)) {
+            Toast.info('请先登录')
+        } else {
+            // 跳转到修改页面
+            history.push('/setting');
+        }
+        
     }
 
     const handleToDownload = (src, name) => {
@@ -92,34 +70,28 @@ function Mine(props) {
         document.body.removeChild(a);
     }
 
-
-
     useEffect(() => {
         //   获取用户信息
         let user = JSON.parse(localStorage.getItem('user'));
-        let work = JSON.parse(localStorage.getItem('work'));
 
         if (!user) {
             Toast.info('请先登录～');
             return;
         }
 
-        if (work && user) {
-            setUserState(Object.assign(user, work))
+        if (data?.own && isNotNull(data.own)) {
+            setUserState(Object.assign(user, data));
         } else {
-             // 获取作品信息
+            // 获取作品信息
             getlist({userId: user.userId}).then(res => {
                 user = Object.assign(user, res);
                 setUserState(user);
-                localStorage.setItem('work', JSON.stringify(res));
+                setData(pre => Object.assign(pre, res))
             }).catch(err => {
-                // console.log('err', err);
-                setUserState(user);
+                console.log('err', err);
             });
         }
-    
     } ,[]);
-
 
 
     return (
@@ -171,7 +143,7 @@ function Mine(props) {
                     </div>
                 </Tabs>
             : 
-            <div className="bu-tologin" onClick={() => handleToUpdate('/login')}>点击前往登录页面</div>
+            <div className="bu-tologin" onClick={() => history.push('/login')}>点击前往登录页面</div>
             }
         </div>
     );

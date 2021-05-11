@@ -7,6 +7,7 @@ export const IMAGE_PHONE = `${IMAGE}phone.png`
 export const IMAGE_USER = `${IMAGE}user.png`
 export const IMAGE_LOVE = `${IMAGE}love.png`
 export const IMAGE_LOVE_PINK = `${IMAGE}love_pink.png`
+export const IMAGE_LOVE_FILL = `${IMAGE}love_fill.png`
 export const IMAGE_ARROW = `${IMAGE}arrow.png`
 export const IMAGE_LOCK = `${IMAGE}lock.png`
 export const IMAGE_CAPTCHA = `${IMAGE}captcha.png`
@@ -43,50 +44,126 @@ export const IMAGE_EXAMPLE6 = `${IMAGE}example6.jpeg`
 
 export const IMAGE_BACK1 = `${IMAGE}back.jpeg`
 export const IMAGE_ICON = `${IMAGE}icon.png`
+export const IMAGE_SOCITY_TITILE = `${IMAGE}socity-title.png`
+export const IMAGE_BACK2 = `${IMAGE}back2.jpeg`
 
-const findNode = (oriObj, num) => {
+// 亮度  锐化 对比度  色调  裁剪 滤镜
 
-    let stack = [];
-    let result = [];
-    let floor = 0;
-    let flag = false;
-
-    stack.push(oriObj);
-
-    while(stack.length > 0 && !flag) {
-
-        // 取顶端的数据
-        let node = stack.pop();
-
-        let res = Object.assign({}, {
-            departmentId: node.departmentId,
-            departmentName: node.departmentName
-        })
-
-
-        if (node?.departmentId === num) {
-
-            result = stack;
-            flag = true;
-        }else {
-            // 存在子节点
-            if (node?.subDepartment && node?.subDepartment.length > 0) {
-                stack.push(node.subDepartment[0]);
-            } else {
-                // 没有找到该num
-                result = null;
-                flag = true;
-            }
-        }
+export const tabList = [
+    {
+        index: 0,
+        title: '编辑',
+        key: 'edit'
+    },
+    {
+        index: 1,
+        title: '裁剪',
+        key: 'tailor'
+    },
+    {
+        index: 2,
+        title: '滤镜',
+        key: 'filter'
     }
-    console.log('result', result);
-    return result;
-}
+];
 
-const test = (data, filterArr) => {
-
-    // 递归循环
-    for (let i = 0; i < filterArr.length; i++) {
-        findNode(data, filterArr[i]);
+ export const editList = [
+    {
+        type: 'logo',
+        img: IMAGE_PEN,
+    },
+    {
+        type: 'brightness',
+        text: '亮度',
+        img: IMAGE_BRIGHTNESS,
+        isClicked: true,
+        value: 0
+    },
+    {
+        type: 'triangle',
+        text: '锐化',
+        img: IMAGE_TRIANGLE,
+        isClicked: false,
+        value: 0
+    },
+    {
+        type: 'ratio',
+        text: '对比度',
+        img: IMAGE_RATIO,
+        isClicked: false,
+        value: 0
+    },
+    {
+        type: 'palette',
+        text: '色调',
+        img: IMAGE_PALETTE,
+        isClicked: false,
+        value: 0
     }
-}
+];
+
+export const tailorList = [
+    {
+        type: 'logo',
+        img: IMAGE_SPLICE,
+        isClicked: false
+    },
+    {
+        type: 'adapt',
+        img: IMAGE_ADAPT,
+        isClicked: false
+    },
+    {
+        type: 'one',
+        img: IMAGE_ONE,
+        isClicked: false
+    },
+    {
+        type: 'three',
+        img: IMAGE_THREE,
+        isClicked: false
+    },
+    {
+        type: 'four',
+        img: IMAGE_FOUR,
+        isClicked: false
+    }
+];
+
+export const filterList = [
+    {
+        type: 'logo',
+        img: IMGAE_GLASSES,
+        isClicked: false
+    },
+    {
+        type: 'blackwhite',
+        text: '黑白',
+        isClicked: false,
+    },
+    {
+        type: 'oildpainting',
+        text: '油画',
+        isClicked: false
+    },
+    {
+        type: 'fupian', // ,
+        text: '负片',
+        isClicked: false,
+    },
+    {
+        type: 'relief', // 
+        text: '浮雕',
+        isClicked: false   
+    },
+    {
+        type: 'gaosi',
+        text: '高斯',
+        isClicked: false
+    },
+    {
+        type: 'old',
+        text: '怀旧',
+        isClicked: false
+    }
+]

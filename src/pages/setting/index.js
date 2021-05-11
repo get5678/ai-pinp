@@ -199,7 +199,7 @@ function Setting(props) {
         <div className="setting-container" style={{backgroundImage: `url(${IMAGE_BACK1})`}}>
             
             <div className="setting-nav">
-                <ArrowBack color="#fff" style={{position: 'absolute', left: '0.8rem'}} />
+                <ArrowBack style={{position: 'absolute', left: '0.8rem'}} />
                 <p className="nav-title">我的资料</p>
             </div>
 
